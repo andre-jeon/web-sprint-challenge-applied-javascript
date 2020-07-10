@@ -28,39 +28,75 @@ console.log(axios)
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
 
 .then(res => {
+
     console.log(res)
+    const article1 = res.data.articles.bootstrap
+    const article2 = res.data.articles.javascript
+    const article3 = res.data.articles.jquery
+    const article4 = res.data.articles.node
+    const article5 = res.data.articles.technology
+
+    article1.forEach((item) => {
+        articleContainer.appendChild(articleMaker(item))
+    })
+
+    article2.forEach((item) => {
+        articleContainer.appendChild(articleMaker(item))
+    })
+
+    article3.forEach((item) => {
+        articleContainer.appendChild(articleMaker(item))
+    })
+
+    article4.forEach((item) => {
+        articleContainer.appendChild(articleMaker(item))
+    })
+
+    article5.forEach((item) => {
+        articleContainer.appendChild(articleMaker(item))
+    })
+
 })
+
 .catch(err => {
     console.log(err)
 })
 
-function articleMaker(data){
+const articleContainer = document.querySelector('div.cards-container')
 
-    let mainCard = document.createElement('div');
-    let headline = document.createElement('div');
-    let author = document.createElement('div');
-    let imageContainer = document.createElement('div');
-    let image = document.createElement('img');
-    let authorName = document.createElement('span');
+function articleMaker(obj){
 
-    mainCard.classList.add('card');
-    headline.classList.add('headline');
-    author.classList.add('author');
-    imageContainer.classList.add('img-container');
+    const mainCard = document.createElement('div')
+    const headline = document.createElement('div')
+    const author = document.createElement('div')
+    const imageContainer = document.createElement('div')
+    const image = document.createElement('img')
+    const authorName = document.createElement('span')
+
+    const logHeadline = document.createElement('div')
+
+    mainCard.classList.add('card')
+    headline.classList.add('headline')
+    author.classList.add('author')
+    imageContainer.classList.add('img-container')
 
     author.appendChild(imageContainer)
     author.appendChild(authorName)
     imageContainer.appendChild(image)
+    mainCard.appendChild(author)
+    mainCard.appendChild(headline)
+    mainCard.appendChild(logHeadline)
+
+    image.src = obj.authorPhoto
+    authorName.textContent = obj.authorName
+    headline.textContent = obj.headline
+
+    // logHeadline.textContent = obj.headline
+
+    mainCard.addEventListener('click', () => {
+        console.log(obj.headline)
+    })
 
 
-
-    headline.textContent = data.headline;
-    image.src = data.authorPhoto;
-    span.textContent = "By " + data.authorName;
-
-    //connect elements
-
-    //return
-    return cardDiv;
-
-} 
+    return mainCard;
+}
