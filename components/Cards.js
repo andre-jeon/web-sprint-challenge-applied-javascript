@@ -73,8 +73,6 @@ function articleMaker(obj){
     const image = document.createElement('img')
     const authorName = document.createElement('span')
 
-    const logHeadline = document.createElement('div')
-
     mainCard.classList.add('card')
     headline.classList.add('headline')
     author.classList.add('author')
@@ -85,13 +83,10 @@ function articleMaker(obj){
     imageContainer.appendChild(image)
     mainCard.appendChild(author)
     mainCard.appendChild(headline)
-    mainCard.appendChild(logHeadline)
 
     image.src = obj.authorPhoto
     authorName.textContent = obj.authorName
     headline.textContent = obj.headline
-
-    // logHeadline.textContent = obj.headline
 
     mainCard.addEventListener('click', () => {
         console.log(obj.headline)
