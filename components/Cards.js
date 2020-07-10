@@ -20,3 +20,78 @@
 // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
 //
 // Use your function to create a card for each of the articles, and append each card to the DOM.
+
+
+import axios from 'axios'
+console.log(axios)
+
+axios.get('https://lambda-times-backend.herokuapp.com/articles')
+
+.then(res => {
+
+    console.log(res)
+    const article1 = res.data.articles.bootstrap
+    const article2 = res.data.articles.javascript
+    const article3 = res.data.articles.jquery
+    const article4 = res.data.articles.node
+    const article5 = res.data.articles.technology
+
+    article1.forEach((item) => {
+        articleContainer.appendChild(articleMaker(item))
+    })
+
+    article2.forEach((item) => {
+        articleContainer.appendChild(articleMaker(item))
+    })
+
+    article3.forEach((item) => {
+        articleContainer.appendChild(articleMaker(item))
+    })
+
+    article4.forEach((item) => {
+        articleContainer.appendChild(articleMaker(item))
+    })
+
+    article5.forEach((item) => {
+        articleContainer.appendChild(articleMaker(item))
+    })
+
+})
+
+.catch(err => {
+    console.log(err)
+})
+
+const articleContainer = document.querySelector('div.cards-container')
+
+function articleMaker(obj){
+
+    const mainCard = document.createElement('div')
+    const headline = document.createElement('div')
+    const author = document.createElement('div')
+    const imageContainer = document.createElement('div')
+    const image = document.createElement('img')
+    const authorName = document.createElement('span')
+
+    mainCard.classList.add('card')
+    headline.classList.add('headline')
+    author.classList.add('author')
+    imageContainer.classList.add('img-container')
+
+    author.appendChild(imageContainer)
+    author.appendChild(authorName)
+    imageContainer.appendChild(image)
+    mainCard.appendChild(author)
+    mainCard.appendChild(headline)
+
+    image.src = obj.authorPhoto
+    authorName.textContent = obj.authorName
+    headline.textContent = obj.headline
+
+    mainCard.addEventListener('click', () => {
+        console.log(obj.headline)
+    })
+
+
+    return mainCard;
+}
